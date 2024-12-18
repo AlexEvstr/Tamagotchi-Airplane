@@ -7,10 +7,11 @@ public class EnergyController : MonoBehaviour
 {
     [SerializeField] private Image energyBar; // Image для шкалы
     [SerializeField] private Text chargesText; // Text для вывода текущих зарядов
+    [SerializeField] private Text fillPercentageBtnText; // Text для вывода процента заполнения
     [SerializeField] private Text fillPercentageText; // Text для вывода процента заполнения
     [SerializeField] private Text timerText; // Text для вывода времени таймера
     private int maxCharges = 5; // Максимальное количество зарядов
-    private float chargeTime = 5f; // Время, за которое шкала заполняется на 100%
+    private float chargeTime = 30f; // Время, за которое шкала заполняется на 100%
 
     private int currentCharges = 3; // Текущие заряды
     private float fillAmount = 0f; // Уровень заполнения шкалы
@@ -53,6 +54,7 @@ public class EnergyController : MonoBehaviour
                         Debug.Log("end");
                         timerText.text = "Fully charged";
                         fillPercentageText.text = "";
+                        fillPercentageBtnText.text = "";
                     }
                 }
             }
@@ -71,6 +73,7 @@ public class EnergyController : MonoBehaviour
     private void UpdateFillPercentageText()
     {
         fillPercentageText.text = $"{Mathf.FloorToInt(fillAmount * 100)}%";
+        fillPercentageBtnText.text = $"{Mathf.FloorToInt(fillAmount * 100)}%";
     }
 
     private void UpdateTimerText(float remainingTime)
