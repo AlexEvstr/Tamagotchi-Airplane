@@ -5,6 +5,7 @@ public class OilController : MonoBehaviour
 {
     [SerializeField] private Image oilBar; // Image для шкалы
     [SerializeField] private Text chargesText; // Text для вывода текущих зарядов
+    [SerializeField] private Text chargesCloudWindowText; // Text для вывода текущих зарядов
     [SerializeField] private Text fillPercentageText; // Text для вывода процента заполнения
     [SerializeField] private Text fillPercentageBtnText; // Text для вывода процента заполнения
     [SerializeField] private GameObject _fullText;
@@ -43,6 +44,7 @@ public class OilController : MonoBehaviour
     {
         oilBar.fillAmount = (float)currentOil / oilPerCharge;
         chargesText.text = $"{currentCharges}";
+        chargesCloudWindowText.text = $"{currentCharges}";
         if (currentCharges < 5)
         {
             fillPercentageText.text = $"{Mathf.FloorToInt((float)currentOil / oilPerCharge * 100)}%";
@@ -56,11 +58,11 @@ public class OilController : MonoBehaviour
         }
     }
 
-    public void UseCharge()
+    public void UseCharge(int count)
     {
         if (currentCharges > 0)
         {
-            currentCharges--;
+            currentCharges -= count;
             SaveState();
             UpdateUI();
         }
@@ -77,5 +79,10 @@ public class OilController : MonoBehaviour
     {
         currentCharges = PlayerPrefs.GetInt(ChargesKey, 3);
         currentOil = PlayerPrefs.GetInt(OilKey, 0);
+    }
+
+    public int ReturnCharges()
+    {
+        return currentCharges;
     }
 }

@@ -7,6 +7,7 @@ public class EnergyController : MonoBehaviour
 {
     [SerializeField] private Image energyBar; // Image для шкалы
     [SerializeField] private Text chargesText; // Text для вывода текущих зарядов
+    [SerializeField] private Text chargesCloudWindowText; // Text для вывода текущих зарядов
     [SerializeField] private Text fillPercentageBtnText; // Text для вывода процента заполнения
     [SerializeField] private Text fillPercentageText; // Text для вывода процента заполнения
     [SerializeField] private Text timerText; // Text для вывода времени таймера
@@ -66,6 +67,7 @@ public class EnergyController : MonoBehaviour
     private void UpdateUI()
     {
         chargesText.text = $"{currentCharges}";
+        chargesCloudWindowText.text = $"{currentCharges}";
         if (currentCharges < 5)
             UpdateFillPercentageText();
     }
@@ -86,11 +88,11 @@ public class EnergyController : MonoBehaviour
         }
     }
 
-    public void UseCharge()
+    public void UseCharge(int count)
     {
         if (currentCharges > 0)
         {
-            currentCharges--;
+            currentCharges -= count;
             isFilling = true;
             SaveState();
             UpdateUI();
@@ -148,5 +150,10 @@ public class EnergyController : MonoBehaviour
         }
 
         SaveState();
+    }
+
+    public int ReturnCharges()
+    {
+        return currentCharges;
     }
 }
