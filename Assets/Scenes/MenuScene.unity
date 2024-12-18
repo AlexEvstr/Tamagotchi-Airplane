@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.40033975, g: 0.211654, b: 0.37071067, a: 1}
+  m_IndirectSpecularColor: {r: 0.27420792, g: 0.1601361, b: 0.28062204, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -480,7 +480,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &129991015
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1387,7 +1387,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &707167202
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2513,7 +2513,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1258633400
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2830,7 +2830,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1342981562}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2069170459}
+        m_TargetAssemblyTypeName: WindowSwitcher, Assembly-CSharp
+        m_MethodName: OpenLightningWindow
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1432329233
 GameObject:
   m_ObjectHideFlags: 0
@@ -2916,7 +2928,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1432329236}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2069170459}
+        m_TargetAssemblyTypeName: WindowSwitcher, Assembly-CSharp
+        m_MethodName: OpenCloudsWindow
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1432329236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3506,7 +3530,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1685361374}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2069170459}
+        m_TargetAssemblyTypeName: WindowSwitcher, Assembly-CSharp
+        m_MethodName: OpenOilWindow
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1685361374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3633,6 +3669,7 @@ GameObject:
   - component: {fileID: 2069170456}
   - component: {fileID: 2069170457}
   - component: {fileID: 2069170458}
+  - component: {fileID: 2069170459}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -3721,6 +3758,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeImage: {fileID: 340540279}
   fadeDuration: 0.5
+--- !u!114 &2069170459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2069170453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebd6f6babe3d348308a622c5924a6e4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightningWindow: {fileID: 175695600}
+  cloudsWindow: {fileID: 1484431463}
+  oilWindow: {fileID: 1259820749}
+  fadeImage: {fileID: 340540279}
+  fadeDuration: 0.5
+  lightningButton: {fileID: 1342981564}
+  cloudsButton: {fileID: 1432329235}
+  oilButton: {fileID: 1685361373}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
