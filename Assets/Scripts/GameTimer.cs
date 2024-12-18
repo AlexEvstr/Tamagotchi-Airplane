@@ -8,8 +8,13 @@ public class GameTimer : MonoBehaviour
     private float gameTime = 6f; // Таймер игры в секундах
     private bool isRunning = false; // Флаг для проверки, работает ли таймер
 
+    private VictoryDefeatWindow _victoryDefeatWindow;
+
+    private const string CloudPointsKey = "CloudPoints";
+
     private void Start()
     {
+        _victoryDefeatWindow = GetComponent<VictoryDefeatWindow>();
         StartTimer();
     }
 
@@ -23,6 +28,7 @@ public class GameTimer : MonoBehaviour
     {
         isRunning = false;
         Debug.Log("Lose");
+        _victoryDefeatWindow.ShowDefeatWindow();
     }
 
     private IEnumerator TimerRoutine()
@@ -40,6 +46,8 @@ public class GameTimer : MonoBehaviour
         if (isRunning)
         {
             Debug.Log("Win");
+            _victoryDefeatWindow.ShowVictoryWindow();
+            AddCloudPoints(5);
         }
 
         isRunning = false;
@@ -50,5 +58,13 @@ public class GameTimer : MonoBehaviour
         int minutes = Mathf.FloorToInt(time / 60);
         int seconds = Mathf.FloorToInt(time % 60);
         timerText.text = $"{minutes}:{seconds:00}";
+    }
+
+    private void AddCloudPoints(int points)
+    {
+        int currentPoints = PlayerPrefs.GetInt(CloudPointsKey, 25);
+        currentPoints += points;
+        PlayerPrefs.SetInt(CloudPointsKey, currentPoints);
+        PlayerPrefs.Save();
     }
 }
