@@ -6,6 +6,7 @@ public class OilController : MonoBehaviour
     [SerializeField] private Image oilBar; // Image для шкалы
     [SerializeField] private Text chargesText; // Text для вывода текущих зарядов
     [SerializeField] private Text fillPercentageText; // Text для вывода процента заполнения
+    [SerializeField] private Text fillPercentageBtnText; // Text для вывода процента заполнения
     [SerializeField] private GameObject _fullText;
     private int maxCharges = 5; // Максимальное количество зарядов
     private int oilPerCharge = 100; // Количество масла для одного заряда
@@ -43,11 +44,15 @@ public class OilController : MonoBehaviour
         oilBar.fillAmount = (float)currentOil / oilPerCharge;
         chargesText.text = $"{currentCharges}";
         if (currentCharges < 5)
+        {
             fillPercentageText.text = $"{Mathf.FloorToInt((float)currentOil / oilPerCharge * 100)}%";
+            fillPercentageBtnText.text = $"{Mathf.FloorToInt((float)currentOil / oilPerCharge * 100)}%";
+        }
         else
         {
             _fullText.SetActive(true);
             fillPercentageText.text = "";
+            fillPercentageBtnText.text = "";
         }
     }
 
