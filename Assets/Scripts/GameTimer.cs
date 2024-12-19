@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class GameTimer : MonoBehaviour
 {
     [SerializeField] private Text timerText; // Text для вывода времени
-    private float gameTime = 10f; // Таймер игры в секундах
+    private float gameTime = 60f; // Таймер игры в секундах
     private bool isRunning = false; // Флаг для проверки, работает ли таймер
 
     private VictoryDefeatWindow _victoryDefeatWindow;

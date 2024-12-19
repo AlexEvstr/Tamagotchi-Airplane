@@ -8,6 +8,7 @@ public class PlaneController : MonoBehaviour
 
     private Vector3 touchStartPosition; // Начальная позиция касания
     private Vector3 planeStartPosition; // Начальная позиция самолета
+    [SerializeField] private GameObject _tutorialWindow;
 
     private void Update()
     {
@@ -19,7 +20,7 @@ public class PlaneController : MonoBehaviour
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
-
+            if (_tutorialWindow.activeInHierarchy) _tutorialWindow.SetActive(false);
             switch (touch.phase)
             {
                 case TouchPhase.Began:
