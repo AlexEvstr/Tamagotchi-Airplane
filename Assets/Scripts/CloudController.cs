@@ -17,6 +17,9 @@ public class CloudController : MonoBehaviour
     private const string CloudPointsKey = "CloudPoints"; // Ключ для сохранения очков в PlayerPrefs
     private const string LastTimeKey = "CloudLastTime"; // Ключ для сохранения времени выхода
 
+    [SerializeField] private GameObject _notEnoughOil;
+    [SerializeField] private GameObject _notEnoughEnergy;
+
     private void Start()
     {
         _oilController = GetComponent<OilController>();
@@ -58,9 +61,23 @@ public class CloudController : MonoBehaviour
         }
         else
         {
-            if (_oilController.ReturnCharges() < 2) Debug.Log("Not enough oil");
-            if (_energyController.ReturnCharges() < 2) Debug.Log("Not enough energy");
+            if (_oilController.ReturnCharges() < 2) StartCoroutine(ShowNotEnoughOil());
+            if (_energyController.ReturnCharges() < 2) StartCoroutine(ShowNotEnoughEnergy());
         }
+    }
+
+    private IEnumerator ShowNotEnoughOil()
+    {
+        _notEnoughOil.SetActive(true);
+        yield return new WaitForSeconds(1.0f);
+        _notEnoughOil.SetActive(false);
+    }
+
+    private IEnumerator ShowNotEnoughEnergy()
+    {
+        _notEnoughEnergy.SetActive(true);
+        yield return new WaitForSeconds(1.0f);
+        _notEnoughEnergy.SetActive(false);
     }
 
     private void SaveState()

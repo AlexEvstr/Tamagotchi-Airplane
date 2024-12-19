@@ -83,7 +83,7 @@ public class WindowSwitcher : MonoBehaviour
     {
         if (button.transform.childCount > 0)
         {
-            button.transform.GetChild(0).gameObject.SetActive(state);
+            button.transform.GetChild(2).gameObject.SetActive(state);
         }
     }
 }

@@ -33,7 +33,6 @@ public class SceneFadeManager : MonoBehaviour
 
     private IEnumerator FadeOut(string sceneName)
     {
-        yield return new WaitForSeconds(0.5f);
         fadeImage.gameObject.SetActive(true);
         for (float t = 0; t < fadeDuration; t += Time.deltaTime)
         {

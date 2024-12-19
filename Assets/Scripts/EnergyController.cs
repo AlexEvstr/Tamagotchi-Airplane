@@ -52,7 +52,6 @@ public class EnergyController : MonoBehaviour
                     {
                         isFilling = false;
                         energyBar.fillAmount = 1f;
-                        Debug.Log("end");
                         timerText.text = "Fully charged";
                         fillPercentageText.text = "";
                         fillPercentageBtnText.text = "";
