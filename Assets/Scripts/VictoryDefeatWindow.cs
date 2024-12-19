@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class VictoryDefeatWindow : MonoBehaviour
 {
-    [SerializeField] private GameObject victoryWindow;
-    [SerializeField] private GameObject defeatWindow;
-    [SerializeField] private float animationDuration = 0.5f;
+    public GameObject victoryWindow;
+    public GameObject defeatWindow;
+    private float animationDuration = 0.5f;
 
     public void ShowVictoryWindow()
     {

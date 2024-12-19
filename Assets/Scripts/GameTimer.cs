@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class GameTimer : MonoBehaviour
 {
     [SerializeField] private Text timerText; // Text для вывода времени
-    private float gameTime = 6f; // Таймер игры в секундах
+    private float gameTime = 10f; // Таймер игры в секундах
     private bool isRunning = false; // Флаг для проверки, работает ли таймер
 
     private VictoryDefeatWindow _victoryDefeatWindow;
@@ -14,6 +14,7 @@ public class GameTimer : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1;
         _victoryDefeatWindow = GetComponent<VictoryDefeatWindow>();
         StartTimer();
     }
@@ -35,6 +36,7 @@ public class GameTimer : MonoBehaviour
     {
         float remainingTime = gameTime;
 
+        //while (remainingTime > 0 && isRunning && !_victoryDefeatWindow.defeatWindow.activeInHierarchy)
         while (remainingTime > 0 && isRunning)
         {
             UpdateTimerText(remainingTime);
@@ -47,7 +49,7 @@ public class GameTimer : MonoBehaviour
         {
             Debug.Log("Win");
             _victoryDefeatWindow.ShowVictoryWindow();
-            AddCloudPoints(5);
+            AddCloudPoints(6);
         }
 
         isRunning = false;
