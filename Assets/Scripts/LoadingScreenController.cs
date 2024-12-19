@@ -5,10 +5,10 @@ using System.Collections;
 
 public class LoadingScreenController : MonoBehaviour
 {
-    [SerializeField] private Text loadingText; // Ссылка на текст процента загрузки
-    [SerializeField] private Image fadeImage; // Ссылка на Image для затемнения
-    [SerializeField] private float fadeDuration = 1f; // Длительность затемнения
-    [SerializeField] private string nextSceneName = "MenuScene"; // Имя следующей сцены
+    [SerializeField] private Text loadingText;
+    [SerializeField] private Image fadeImage;
+    [SerializeField] private float fadeDuration = 1f;
+    [SerializeField] private string nextSceneName = "MenuScene";
 
     private void Start()
     {
@@ -17,17 +17,14 @@ public class LoadingScreenController : MonoBehaviour
 
     private IEnumerator LoadingSequence()
     {
-        // Процесс отображения загрузки
         for (int i = 0; i <= 100; i++)
         {
             loadingText.text = i + "%";
-            yield return new WaitForSeconds(0.03f); // Имитируем процесс загрузки
+            yield return new WaitForSeconds(0.03f);
         }
 
-        // Начинаем затемнение
         yield return StartCoroutine(FadeToBlack());
 
-        // Переход на следующую сцену
         SceneManager.LoadScene(nextSceneName);
     }
 

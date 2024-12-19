@@ -16,14 +16,12 @@ public class WindowSwitcher : MonoBehaviour
 
     private void Start()
     {
-        // Initialize with cloudsWindow active and others inactive
         lightningWindow.SetActive(false);
         cloudsWindow.SetActive(true);
         oilWindow.SetActive(false);
         fadeImage.color = new Color(0, 0, 0, 0);
         fadeImage.gameObject.SetActive(false);
 
-        // Initialize button child states
         SetButtonChildState(lightningButton, false);
         SetButtonChildState(cloudsButton, true);
         SetButtonChildState(oilButton, false);
@@ -31,22 +29,24 @@ public class WindowSwitcher : MonoBehaviour
 
     public void OpenLightningWindow()
     {
-        StartCoroutine(SwitchWindow(lightningWindow, lightningButton));
+        if (!lightningWindow.activeInHierarchy)
+            StartCoroutine(SwitchWindow(lightningWindow, lightningButton));
     }
 
     public void OpenCloudsWindow()
     {
-        StartCoroutine(SwitchWindow(cloudsWindow, cloudsButton));
+        if (!cloudsWindow.activeInHierarchy)
+            StartCoroutine(SwitchWindow(cloudsWindow, cloudsButton));
     }
 
     public void OpenOilWindow()
     {
-        StartCoroutine(SwitchWindow(oilWindow, oilButton));
+        if (!oilWindow.activeInHierarchy)
+            StartCoroutine(SwitchWindow(oilWindow, oilButton));
     }
 
     private IEnumerator SwitchWindow(GameObject targetWindow, Button targetButton)
     {
-        // Fade out
         fadeImage.gameObject.SetActive(true);
         for (float t = 0; t < fadeDuration; t += Time.deltaTime)
         {
@@ -56,19 +56,16 @@ public class WindowSwitcher : MonoBehaviour
         }
         fadeImage.color = new Color(0, 0, 0, 1);
 
-        // Switch windows
         lightningWindow.SetActive(false);
         cloudsWindow.SetActive(false);
         oilWindow.SetActive(false);
         targetWindow.SetActive(true);
 
-        // Update button child states
         SetButtonChildState(lightningButton, false);
         SetButtonChildState(cloudsButton, false);
         SetButtonChildState(oilButton, false);
         SetButtonChildState(targetButton, true);
 
-        // Fade in
         for (float t = 0; t < fadeDuration; t += Time.deltaTime)
         {
             float alpha = 1 - (t / fadeDuration);

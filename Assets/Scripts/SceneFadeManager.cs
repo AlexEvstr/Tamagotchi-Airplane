@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneFadeManager : MonoBehaviour
 {
-    [SerializeField] private Image fadeImage; // Ссылка на черный Image для затемнения
-    [SerializeField] private float fadeDuration = 0.5f; // Длительность затемнения
+    [SerializeField] private Image fadeImage;
+    [SerializeField] private float fadeDuration = 0.5f;
 
     private void Start()
     {

@@ -19,10 +19,8 @@ public class VictoryDefeatWindow : MonoBehaviour
 
     private IEnumerator ShowWindow(GameObject window)
     {
-        // Enable the window
         window.SetActive(true);
 
-        // Scale the child object from 0,0 to 1,1
         Transform childTransform = window.transform.GetChild(0);
         childTransform.localScale = Vector3.zero;
 

@@ -25,7 +25,6 @@ public class MenuController : MonoBehaviour
 
     private IEnumerator SwitchWindow(GameObject targetWindow)
     {
-        // Fade out
         fadeImage.gameObject.SetActive(true);
         for (float t = 0; t < fadeDuration; t += Time.deltaTime)
         {
@@ -38,8 +37,6 @@ public class MenuController : MonoBehaviour
         _tutorialPanel.SetActive(false);
         _cloudPanel.SetActive(true);
 
-
-        // Fade in
         for (float t = 0; t < fadeDuration; t += Time.deltaTime)
         {
             float alpha = 1 - (t / fadeDuration);

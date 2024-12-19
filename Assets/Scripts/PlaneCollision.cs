@@ -9,7 +9,6 @@ public class PlaneCollision : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Wall"))
         {
-            //_victoryDefeatWindow.ShowDefeatWindow();
             _gameTimer.StopTimer();
             Destroy(gameObject);
         }

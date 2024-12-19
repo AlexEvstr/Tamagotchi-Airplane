@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ObstacleMover : MonoBehaviour
 {
-    private float speed = 15f; // Скорость движения
+    private float speed = 15f;
     private VictoryDefeatWindow _victoryDefeatWindow;
 
     private void Start()

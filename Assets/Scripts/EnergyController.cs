@@ -5,20 +5,20 @@ using System;
 
 public class EnergyController : MonoBehaviour
 {
-    [SerializeField] private Image energyBar; // Image для шкалы
-    [SerializeField] private Text chargesText; // Text для вывода текущих зарядов
-    [SerializeField] private Text chargesCloudWindowText; // Text для вывода текущих зарядов
-    [SerializeField] private Text fillPercentageBtnText; // Text для вывода процента заполнения
-    [SerializeField] private Text fillPercentageText; // Text для вывода процента заполнения
-    [SerializeField] private Text timerText; // Text для вывода времени таймера
-    private int maxCharges = 5; // Максимальное количество зарядов
-    private float chargeTime = 30f; // Время, за которое шкала заполняется на 100%
+    [SerializeField] private Image energyBar;
+    [SerializeField] private Text chargesText;
+    [SerializeField] private Text chargesCloudWindowText;
+    [SerializeField] private Text fillPercentageBtnText;
+    [SerializeField] private Text fillPercentageText;
+    [SerializeField] private Text timerText;
+    private int maxCharges = 5;
+    private float chargeTime = 30f;
 
-    private int currentCharges = 3; // Текущие заряды
-    private float fillAmount = 0f; // Уровень заполнения шкалы
-    private bool isFilling = true; // Флаг, заполняется ли шкала
-    private const string ChargesKey = "CurrentCharges"; // Ключ для сохранения зарядов в PlayerPrefs
-    private const string LastTimeKey = "LastEnergyTime"; // Ключ для сохранения времени выхода
+    private int currentCharges = 3;
+    private float fillAmount = 0f;
+    private bool isFilling = true;
+    private const string ChargesKey = "CurrentCharges";
+    private const string LastTimeKey = "LastEnergyTime";
 
     void Start()
     {
@@ -108,7 +108,7 @@ public class EnergyController : MonoBehaviour
     private void LoadState()
     {
         currentCharges = PlayerPrefs.GetInt(ChargesKey, 3);
-        fillAmount = 0f; // Начинаем с нуля, пересчитываем при оффлайн-прогрессе
+        fillAmount = 0f;
         energyBar.fillAmount = fillAmount;
 
         if (currentCharges >= maxCharges)

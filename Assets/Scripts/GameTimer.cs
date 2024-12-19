@@ -4,17 +4,20 @@ using UnityEngine.UI;
 
 public class GameTimer : MonoBehaviour
 {
-    [SerializeField] private Text timerText; // Text для вывода времени
-    private float gameTime = 60f; // Таймер игры в секундах
-    private bool isRunning = false; // Флаг для проверки, работает ли таймер
+    [SerializeField] private Text timerText;
+    private float gameTime = 60f;
+    private bool isRunning = false;
 
     private VictoryDefeatWindow _victoryDefeatWindow;
 
     private const string CloudPointsKey = "CloudPoints";
 
+    private AudioController _audioController;
+
     private void Start()
     {
         Time.timeScale = 1;
+        _audioController = GetComponent<AudioController>();
         _victoryDefeatWindow = GetComponent<VictoryDefeatWindow>();
         StartTimer();
     }
@@ -28,7 +31,7 @@ public class GameTimer : MonoBehaviour
     public void StopTimer()
     {
         isRunning = false;
-        Debug.Log("Lose");
+        _audioController.SoundLose();
         _victoryDefeatWindow.ShowDefeatWindow();
     }
 
@@ -36,7 +39,6 @@ public class GameTimer : MonoBehaviour
     {
         float remainingTime = gameTime;
 
-        //while (remainingTime > 0 && isRunning && !_victoryDefeatWindow.defeatWindow.activeInHierarchy)
         while (remainingTime > 0 && isRunning)
         {
             UpdateTimerText(remainingTime);
@@ -47,9 +49,9 @@ public class GameTimer : MonoBehaviour
 
         if (isRunning)
         {
-            Debug.Log("Win");
+            _audioController.SoundWin();
             _victoryDefeatWindow.ShowVictoryWindow();
-            AddCloudPoints(6);
+            AddCloudPoints(8);
         }
 
         isRunning = false;
