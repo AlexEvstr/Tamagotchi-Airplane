@@ -8,7 +8,6 @@ public class OilController : MonoBehaviour
     [SerializeField] private Text chargesCloudWindowText;
     [SerializeField] private Text fillPercentageText;
     [SerializeField] private Text fillPercentageBtnText;
-    [SerializeField] private GameObject _fullText;
     private int maxCharges = 5;
     private int oilPerCharge = 100;
 
@@ -42,19 +41,24 @@ public class OilController : MonoBehaviour
 
     private void UpdateUI()
     {
-        oilBar.fillAmount = (float)currentOil / oilPerCharge;
+        float totalFill = ((float)currentCharges + (float)currentOil / oilPerCharge) / maxCharges;
+        oilBar.fillAmount = totalFill;
+        //oilBar.fillAmount = (float)currentOil / oilPerCharge;
         chargesText.text = $"{currentCharges}";
         chargesCloudWindowText.text = $"{currentCharges}";
-        if (currentCharges < 5)
+        if (currentCharges < maxCharges)
         {
+            int percentage = Mathf.FloorToInt(totalFill * 100);
+            fillPercentageText.text = $"{percentage}%";
+            fillPercentageBtnText.text = $"{percentage}%";
             fillPercentageText.text = $"{Mathf.FloorToInt((float)currentOil / oilPerCharge * 100)}%";
-            fillPercentageBtnText.text = $"{Mathf.FloorToInt((float)currentOil / oilPerCharge * 100)}%";
+            //fillPercentageBtnText.text = $"{Mathf.FloorToInt((float)currentOil / oilPerCharge * 100)}%";
         }
         else
         {
-            _fullText.SetActive(true);
-            fillPercentageText.text = "";
-            fillPercentageBtnText.text = "";
+            oilBar.fillAmount = 1;
+            fillPercentageText.text = "Fully charged";
+            fillPercentageBtnText.text = "100%";
         }
     }
 
@@ -77,8 +81,12 @@ public class OilController : MonoBehaviour
 
     private void LoadState()
     {
-        currentCharges = PlayerPrefs.GetInt(ChargesKey, 3);
+        currentCharges = PlayerPrefs.GetInt(ChargesKey, 4);
         currentOil = PlayerPrefs.GetInt(OilKey, 0);
+        if (currentCharges >= maxCharges)
+        {
+            currentOil = 0;
+        }
     }
 
     public int ReturnCharges()

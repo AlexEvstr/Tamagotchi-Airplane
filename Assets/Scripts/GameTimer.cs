@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class GameTimer : MonoBehaviour
 {
     [SerializeField] private Text timerText;
-    private float gameTime = 60f;
+    private float gameTime = 30f;
     private bool isRunning = false;
 
     private VictoryDefeatWindow _victoryDefeatWindow;

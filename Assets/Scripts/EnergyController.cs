@@ -9,12 +9,11 @@ public class EnergyController : MonoBehaviour
     [SerializeField] private Text chargesText;
     [SerializeField] private Text chargesCloudWindowText;
     [SerializeField] private Text fillPercentageBtnText;
-    [SerializeField] private Text fillPercentageText;
     [SerializeField] private Text timerText;
     private int maxCharges = 5;
     private float chargeTime = 30f;
 
-    private int currentCharges = 3;
+    private int currentCharges = 4;
     private float fillAmount = 0f;
     private bool isFilling = true;
     private const string ChargesKey = "CurrentCharges";
@@ -35,7 +34,8 @@ public class EnergyController : MonoBehaviour
             if (isFilling && currentCharges < maxCharges)
             {
                 fillAmount += Time.deltaTime / chargeTime;
-                energyBar.fillAmount = fillAmount;
+                //energyBar.fillAmount = fillAmount;
+                UpdateEnergyBar();
                 UpdateFillPercentageText();
 
                 float remainingTime = chargeTime * (1f - fillAmount);
@@ -51,10 +51,10 @@ public class EnergyController : MonoBehaviour
                     if (currentCharges >= maxCharges)
                     {
                         isFilling = false;
-                        energyBar.fillAmount = 1f;
+                        UpdateEnergyBar();
+                        //energyBar.fillAmount = 1f;
                         timerText.text = "Fully charged";
-                        fillPercentageText.text = "";
-                        fillPercentageBtnText.text = "";
+                        fillPercentageBtnText.text = "100%";
                     }
                 }
             }
@@ -73,8 +73,14 @@ public class EnergyController : MonoBehaviour
 
     private void UpdateFillPercentageText()
     {
-        fillPercentageText.text = $"{Mathf.FloorToInt(fillAmount * 100)}%";
-        fillPercentageBtnText.text = $"{Mathf.FloorToInt(fillAmount * 100)}%";
+        float totalFill = ((currentCharges) + fillAmount) / maxCharges;
+        //fillPercentageBtnText.text = $"{Mathf.FloorToInt(fillAmount * 100)}%";
+        fillPercentageBtnText.text = $"{Mathf.FloorToInt(totalFill * 100)}%";
+    }
+
+    private void UpdateEnergyBar()
+    {
+        energyBar.fillAmount = ((currentCharges) + fillAmount) / maxCharges;
     }
 
     private void UpdateTimerText(float remainingTime)
@@ -107,14 +113,18 @@ public class EnergyController : MonoBehaviour
 
     private void LoadState()
     {
-        currentCharges = PlayerPrefs.GetInt(ChargesKey, 3);
+        currentCharges = PlayerPrefs.GetInt(ChargesKey, 4);
         fillAmount = 0f;
-        energyBar.fillAmount = fillAmount;
+        //energyBar.fillAmount = fillAmount;
 
         if (currentCharges >= maxCharges)
         {
             isFilling = false;
             energyBar.fillAmount = 1f;
+        }
+        else
+        {
+            UpdateEnergyBar();
         }
     }
 
@@ -133,7 +143,8 @@ public class EnergyController : MonoBehaviour
             {
                 float leftoverTime = totalSeconds % chargeTime;
                 fillAmount = leftoverTime / chargeTime;
-                energyBar.fillAmount = fillAmount;
+                //energyBar.fillAmount = fillAmount;
+                UpdateEnergyBar();
             }
             else
             {
@@ -145,7 +156,8 @@ public class EnergyController : MonoBehaviour
         else
         {
             fillAmount = 0f;
-            energyBar.fillAmount = fillAmount;
+            //energyBar.fillAmount = fillAmount;
+            UpdateEnergyBar();
         }
 
         SaveState();
